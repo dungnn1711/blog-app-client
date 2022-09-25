@@ -4,15 +4,11 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import { legacy_createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-import dotenv from 'dotenv';
 
 import './index.css';
 import App from './App';
 import reducers from './redux/reducers';
 import saga from './redux/sagas';
-
-// Config dotenv
-dotenv.config();
 
 // Config saga middleware
 const sagaMiddleware = createSagaMiddleware();
