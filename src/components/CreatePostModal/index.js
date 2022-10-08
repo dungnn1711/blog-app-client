@@ -4,9 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 // Allow user to import image
 import FileBase64 from 'react-file-base64';
 
-import { hideModal, createPost } from '../../redux/actions';
+import { hideModal } from '../../redux/actions';
 import { modalState$ } from '../../redux/selectors';
 import useStyles from './styles';
+import { postActions } from '../../redux/slices/postSlice';
 
 const DEFAULT_DATA = {
     title: '',
@@ -29,7 +30,7 @@ function CreatePostModal(props) {
     // Submit form handler
     const onSubmit = useCallback(() => {
         // Request create new post
-        dispatch(createPost.createPostRequest(data));
+        dispatch(postActions.createPostRequest(data));
         // Clear form
         setData(DEFAULT_DATA);
         // Close modal

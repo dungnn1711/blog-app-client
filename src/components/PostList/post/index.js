@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 
 import useStyles from './styles';
-import * as actions from '../../../redux/actions';
+import { postActions } from '../../../redux/slices/postSlice';
 
 const DEFAULT_MEDIA = 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png';
 
@@ -13,10 +13,10 @@ function Post({ post }) {
     const { title, content, author, likeCount, createAt, attachment } = post;
     // const [like, setLike] = useState(likeCount);
     const classes = useStyles();
-    const dispath = useDispatch();
+    const dispatch = useDispatch();
     const onLikeButtonClick = useCallback(() => {
-        dispath(actions.updatePost.updatePostRequest({...post, likeCount: likeCount + 1}));
-    }, [dispath, likeCount]);
+        dispatch(postActions.updatePostRequest({...post, likeCount: likeCount + 1}));
+    }, [dispatch, likeCount, post]);
     return (
         <Card>
             <CardHeader

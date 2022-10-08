@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { Grid } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as actions from '../../redux/actions';
-import Post from './post';
+import Post from './Post';
 import { postState$ } from '../../redux/selectors';
+import { postActions } from '../../redux/slices/postSlice';
 
 function PostList(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(actions.getPosts.getPostsRequest());
+        dispatch(postActions.getPostsRequest());
     }, [dispatch]);
 
     const posts = useSelector(postState$);

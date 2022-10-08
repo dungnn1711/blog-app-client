@@ -1,9 +1,9 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "@reduxjs/toolkit";
 
-import post from './postReducer';
+import { postReducer } from '../slices/postSlice';
 import modal from './modalReducer';
 
 export default combineReducers({
-    post,
+    post: postReducer,
     modal,
 });

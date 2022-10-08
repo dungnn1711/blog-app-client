@@ -1,16 +1,16 @@
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
-import * as actions from '../actions';
 import * as api from '../../api';
+import { postActions } from '../slices/postSlice';
 
 function* fetchPostsSaga() {
     try {
         // Use `call` to call api
         const posts = yield call(api.getPosts);
         // Use `put` to trigger an action
-        yield put(actions.getPosts.getPostsSuccess(posts.data));
+        yield put(postActions.getPostsSuccess(posts.data));
     } catch (err) {
-        yield put(actions.getPosts.getPostsFailure(err));
+        yield put(postActions.getPostsFailure(err));
     }
 }
 
@@ -19,9 +19,9 @@ function* createPostSaga(action) {
         // Use `call` to call api
         const post = yield call(api.createPost, action.payload);
         // Use `put` to trigger an action
-        yield put(actions.createPost.createPostSuccess(post.data));
+        yield put(postActions.createPostSuccess(post.data));
     } catch (err) {
-        yield put(actions.createPost.createPostFailure(err));
+        yield put(postActions.createPostFailure(err));
     }
 }
 
@@ -30,9 +30,9 @@ function* updatePostSaga(action) {
         // Use `call` to call api
         const updatedPost = yield call(api.updatePost, action.payload);
         // Use `put` to trigger an action
-        yield put(actions.updatePost.updatePostSuccess(updatedPost.data));
+        yield put(postActions.updatePostSuccess(updatedPost.data));
     } catch (err) {
-        yield put(actions.updatePost.updatePostFailure(err));
+        yield put(postActions.updatePostFailure(err));
     }
 }
 
@@ -40,9 +40,9 @@ function* mySaga() {
     // Execute sagas parallel
     yield all([
         // Listen latest action
-        takeLatest(actions.getPosts.getPostsRequest, fetchPostsSaga),
-        takeLatest(actions.createPost.createPostRequest, createPostSaga),
-        takeLatest(actions.updatePost.updatePostRequest, updatePostSaga),
+        takeLatest(postActions.getPostsRequest, fetchPostsSaga),
+        takeLatest(postActions.createPostRequest, createPostSaga),
+        takeLatest(postActions.updatePostRequest, updatePostSaga),
     ]);
 }
 
